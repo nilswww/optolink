@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Mapping for vitotronic/optolink addresses to openhab things.
+
+channel id starts with '*' :
+     -    will not send to openhab but it is posible to ask for this ID on the interface.
+     -    is not implemented in openhab
+     
+Telegram types:
+	BOOLEAN = 1 Byte -> boolean
+	BYTE    = 1 Byte -> short
+	UBYTE   = 1 Byte -> short
+	SHORT   = 2 Byte -> int
+	USHORT  = 2 Byte -> int
+	INT     = 4 byte -> long
+    UINT    = 4 Byte -> long
+    DATE    = 8 Byte -> date (read only)
+    
+For more information about addresses and types see: http://openv.wikispaces.com/
+
+-->
+
+
+
+<optolink device="2049" id="300A" protocol="300">
+
+     <adapterID>VITOCAL</adapterID>        <!-- Unique ID on the Network-->
+     <tty>/dev/ttyUSB0</tty>                 <!-- serial port of the optolink adapter-->
+     <ttytimeout>2000</ttytimeout>           <!-- milliseconds for reading timeout tty -->
+     <port>31113</port>                      <!-- port for incoming communication. See also: http://www.iana.org -->
+
+     <!-- Addressen die von diesem 'device' unterst�tzt werden -->
+     
+     <thing type="heating" id="300A">
+          <description>Viessmann Vitocal 300A</description>
+          <channel  id="*systemid">
+               <description>System ID</description>
+               <telegram address="00F8" type="short"/>
+          </channel>
+          <channel id="outside_temp">
+               <description>Outside Temperature</description>
+               <telegram address="0101" type="short" divider="10"/>
+          </channel>
+     <!--# heating pump -->
+	 </thing>
+	      <thing type="heatingpump" id="heatingpump">
+          <description>Viessmann Vitocal 300A</description>
+          <channel id="Betriebsstunden_Verdichter">
+               <description>Betriebsstunden Verdichter</description>
+               <telegram address="0580" type="uint" divider="3600"/>
+          </channel>
+          <channel id="Betriebsstunden_Heizkreis">
+               <description>Betriebsstunden Heizkreis</description>
+               <telegram address="058D" type="uint" divider="3600"/>
+          </channel>
+		  <channel id="Betriebsstunden_Umschaltventil_Heizen_WW">
+               <description>Betriebsstunden Umschaltventil Heizen/WW</description>
+               <telegram address="0594" type="uint" divider="3600"/>
+          </channel>
+		  <channel id="Betriebsstunden_Ladepumpe_Speicher_Warmwasser">
+               <description>Betriebsstunden Ladepumpe Speicher Warmwasser</description>
+               <telegram address="0596" type="uint" divider="3600"/>
+          </channel>
+		  <channel id="Betriebsstunden_EHeizung_Stufe_1">
+               <description>Betriebsstunden E-Heizung Stufe 1</description>
+               <telegram address="0588" type="uint" divider="3600"/>
+          </channel>
+		  <channel id="Betriebsstunden_EHeizung_Stufe_2">
+               <description>Betriebsstunden E-Heizung Stufe 2</description>
+               <telegram address="0589" type="uint" divider="3600"/>
+          </channel>
+		  <channel id="Energiebilanz_Jahresarbeitszahl">
+               <description>Energiebilanz Jahresarbeitszahl</description>
+               <telegram address="1680" type="short" divider="256"/>
+          </channel>
+		  <channel id="Energiebilanz_Jahresarbeitszahl_Heizen">
+               <description>Energiebilanz Jahresarbeitszahl Heizen</description>
+               <telegram address="1681" type="short" divider="256"/>
+          </channel>
+		  <channel id="Energiebilanz_Jahresarbeitszahl_Warmwasser">
+               <description>Energiebilanz Jahresarbeitszahl Warmwasser</description>
+               <telegram address="1682" type="short" divider="10"/>
+          </channel>
+		  <channel id="Energiebilanz_COP_Heizen">
+               <description>Energiebilanz COP Heizen</description>
+               <telegram address="1690" type="short" divider="10"/>
+          </channel>
+		  <channel id="Energiebilanz_COP_Warmwasser">
+               <description>Energiebilanz COP Warmwasser</description>
+               <telegram address="1691" type="short" divider="10"/>
+          </channel>
+		  <channel id="Energiebilanz_Vorlauftemperatur">
+               <description>Energiebilanz Vorlauftemperatur</description>
+               <telegram address="16B2" type="short" divider="10"/>
+          </channel>
+		  <channel id="Energiebilanz_Rucklauf">
+               <description>Energiebilanz Rücklauf</description>
+               <telegram address="16B3" type="short" divider="10"/>
+          </channel>
+		  <channel id="Energiebilanz_Woche_Heizen_Verbrauch">
+               <description>Energiebilanz Woche Heizen Verbrauch</description>
+               <telegram address="16D1" type="short" divider="10"/>
+          </channel>
+		  <channel id="Energiebilanz_Woche_Heizen_Leistung">
+               <description>Energiebilanz Woche Heizen Leistung</description>
+               <telegram address="16D3" type="short" divider="10"/>
+          </channel>
+		  <channel id="Energiebilanz_Woche_WW_Verbrauch">
+               <description>Energiebilanz Woche WW Verbrauch</description>
+               <telegram address="16D0" type="short" divider="10"/>
+          </channel>
+		  <channel id="Energiebilanz_Woche_WW_Leistung">
+               <description>Energiebilanz Woche WW Leistung</description>
+               <telegram address="16D2" type="short" divider="10"/>
+          </channel>
+		  		  <channel id="Energiebilanz_Jahr_Heizen_Verbrauch">
+               <description>Energiebilanz Jahr Heizen Verbrauch</description>
+               <telegram address="1650" type="short" divider="10"/>
+          </channel>
+		  <channel id="Energiebilanz_Jahr_Heizen_Leistung">
+               <description>Energiebilanz Jahr Heizen Leistung</description>
+               <telegram address="1640" type="short" divider="10"/>
+          </channel>
+		  <channel id="Energiebilanz_Jahr_WW_Verbrauch">
+               <description>Energiebilanz Jahr WW Verbrauch</description>
+               <telegram address="1670" type="short" divider="10"/>
+          </channel>
+		  <channel id="Energiebilanz_Jahr_WW_Leistung">
+               <description>Energiebilanz Jahr WW Leistung</description>
+               <telegram address="1660" type="short" divider="10"/>
+          </channel>
+		  <channel id="Status_Verdichter">
+               <description>Status Verdichter</description>
+               <telegram address="0400" type="boolean"/>
+          </channel>
+		  <channel id="Status_Primarquelle">
+               <description>Status Primärquelle</description>
+               <telegram address="0402" type="boolean"/>
+          </channel>
+		  <channel id="Status_Sekundarquelle">
+               <description>Status Sekundärquelle</description>
+               <telegram address="0404" type="boolean"/>
+          </channel>
+		  <channel id="Status_EHeizung_Stufe_1">
+               <description>"Status E-Heizung Stufe 1</description>
+               <telegram address="0408" type="boolean"/>
+          </channel>
+		  <channel id="Status_EHeizung_Stufe_2">
+               <description>"Status E-Heizung Stufe 2</description>
+               <telegram address="0409" type="boolean"/>
+          </channel>
+		  <channel id="Status_Pumpe_Heizkreis">
+               <description>Status Pumpe Heizkreis</description>
+               <telegram address="040D" type="boolean"/>
+          </channel>
+		  <channel id="Status_Sammelmeldung">
+               <description>Status Sammelmeldung</description>
+               <telegram address="0411" type="boolean"/>
+          </channel>
+		  <channel id="Status_Umschaltventil_Heizen_WW">
+               <description>Status Umschaltventil Heizen/WW</description>
+               <telegram address="0414" type="boolean"/>
+          </channel>
+		  <channel id="Status_Ladepumpe_Speicher_Warmwasser">
+               <description>Status Ladepumpe Speicher Warmwasser</description>
+               <telegram address="0416" type="boolean"/>
+          </channel>
+		  <channel id="Status_Umkehr_EinAus">
+               <description>Status Umkehr Ein/Aus</description>
+               <telegram address="041C" type="boolean"/>
+          </channel>
+		  <channel id="Status_Anforderung_1x_Warmwasser">
+               <description>Status Anforderung 1x Warmwasser</description>
+               <telegram address="B020" type="byte"/>
+          </channel>
+		  <channel id="Einstellung_Betriebsart">
+               <description>Einstellung Betriebsart</description>
+               <telegram address="B0000" type="byte"/>
+          </channel>
+		  <channel id="Einstellung_Raumtemperatur">
+               <description>Einstellung Raumtemperatur</description>
+               <telegram address="2000" type="short" divider="10"/>
+          </channel>
+		  <channel id="Einstellung_Raumtemperatur_Reduziert">
+               <description>Einstellung Raumtemperatur Reduziert</description>
+               <telegram address="2001" type="short" divider="10"/>
+          </channel>
+		  <channel id="Einstellung_Raumtemperatur_Party">
+               <description>Einstellung Raumtemperatur Party</description>
+               <telegram address="2022" type="short" divider="10"/>
+          </channel>
+		  <channel id="Einstellung_Heizkennlinie_Niveau">
+               <description>Einstellung Heizkennlinie Niveau</description>
+               <telegram address="2006" type="short" divider="10"/>
+          </channel>
+		  <channel id="Einstellung_Heizkennlinie_Steigung">
+               <description>Einstellung Heizkennlinie Steigung</description>
+               <telegram address="2007" type="short" divider="10"/>
+          </channel>
+		  <channel id="Einstellung_Temperatur_Warmwasser">
+               <description>Einstellung Temperatur Warmwasser</description>
+               <telegram address="6000" type="short" divider="10"/>
+          </channel>
+		  <channel id="Einstellung_Temperatur_Warmwasser_Soll2">
+               <description>Einstellung Temperatur Warmwasser Sollwert 2</description>
+               <telegram address="600C" type="short" divider="10"/>
+          </channel>
+		  <channel id="Einstellung_Anforderung_Warmwasser">
+               <description>Einstellung Anforderung Warmwasser 1x</description>
+               <telegram address="B0020" type="boolean"/>
+          </channel>
+		  <channel id="Einstellung_Hysterese_Speicher_Heizung">
+               <description>Einstellung Hysterese Speicher Heizung</description>
+               <telegram address="7203" type="short" divider="10"/>
+          </channel>
+		  <channel id="Einstellung_Hysterese_Speicher_Warmwasser">
+               <description>Einstellung Hysterese Speicher Warmwasser</description>
+               <telegram address="6007" type="short" divider="10"/>
+          </channel>
+		  <channel id="Temperatur_Speicher_Heizung">
+               <description>Temperatur Speicher Heizung</description>
+               <telegram address="010B" type="short" divider="10"/>
+          </channel>
+		  <channel id="Temperatur_Externer_Warmeerzeuger">
+               <description>Temperatur Externer Wärmeerzeuger</description>
+               <telegram address="010C" type="short" divider="10"/>
+          </channel>
+		  <channel id="Temperatur_Speicher_Warmwasser">
+               <description>Temperatur Speicher Warmwasser</description>
+               <telegram address="010D" type="short" divider="10"/>
+          </channel>
+		  <channel id="Temperatur_Verdampfer">
+               <description>Temperatur Verdampfer</description>
+               <telegram address="0102" type="short" divider="10"/>
+          </channel>
+		  <channel id="Temperatur_Vorlauf_Sole">
+               <description>Temperatur Vorlauf Sole</description>
+               <telegram address="0103" type="short" divider="10"/>
+          </channel>
+		  <channel id="Temperatur_Rucklauf_Sole">
+               <description>Temperatur Rücklauf Sole</description>
+               <telegram address="0104" type="short" divider="10"/>
+          </channel>
+		  <channel id="Temperatur_Vorlauf_Anlage">
+               <description>Temperatur Vorlauf Anlage</description>
+               <telegram address="1800" type="short" divider="10"/>
+          </channel>
+		  <channel id="Temperatur_Vorlauf_Sekundarkreis">
+               <description>Temperatur Vorlauf Sekundärkreis</description>
+               <telegram address="0105" type="short" divider="10"/>
+          </channel>
+		  <channel id="Temperatur_Rucklauf_Sekundarkreis">
+               <description>Temperatur Rücklauf Sekundärkreis</description>
+               <telegram address="0106" type="short" divider="10"/>
+          </channel>
+		  <channel id="Einschaltungen_Verdichter">
+               <description>Einschaltungen Verdichter</description>
+               <telegram address="0500" type="uint"/>
+          </channel>
+		  <channel id="Einschaltungen_Primarquelle">
+               <description>Einschaltungen Primärquelle</description>
+               <telegram address="0502" type="uint"/>
+          </channel>
+		  <channel id="Einschaltungen_Sekundarquelle">
+               <description>Einschaltungen Sekundärquelle</description>
+               <telegram address="0504" type="uint"/>
+          </channel>
+		  <channel id="Einschaltungen_EHeizung_Stufe_1">
+               <description>Einschaltungen E-Heizung Stufe 1</description>
+               <telegram address="0508" type="uint"/>
+          </channel>
+		  <channel id="Einschaltungen_EHeizung_Stufe_2">
+               <description>Einschaltungen E-Heizung Stufe 2</description>
+               <telegram address="0509" type="uint"/>
+          </channel>
+		  <channel id="Einschaltungen_Heizkreis">
+               <description>Einschaltungen Heizkreis</description>
+               <telegram address="050D" type="uint"/>
+          </channel>
+		  <channel id="Einschaltungen_Sammelmeldung">
+               <description>Einschaltungen Sammelmeldung</description>
+               <telegram address="0511" type="uint"/>
+          </channel>
+		  <channel id="Einschaltungen_Umschaltventil_Heizen_WW">
+               <description>Einschaltungen Umschaltventil Heizen/WW</description>
+               <telegram address="0514" type="uint"/>
+          </channel>
+		  <channel id="Einschaltungen_Ladepumpe_Speicher_Warmwasser">
+               <description>Einschaltungen Ladepumpe Speicher Warmwasser</description>
+               <telegram address="0516" type="uint"/>
+          </channel>
+     </thing>
+     <!--# Puffer-StorageTank -->
+     <thing type="storagetank" id="storagetank">
+          <description>Hot Water Storage Tank an Buffer</description>
+          <channel id="hotwater_temp">
+               <description>Hot water temperatur on top of the buffer.</description>
+               <telegram  address="010D" type="short" divider="10"/>
+          </channel>
+          <channel id="middle_temp">
+               <description>Temperature in the middle of the buffer</description>
+               <telegram  address="010B" type="short" divider="10"/>
+          </channel>
+          <channel id="bottom_temp">
+               <description>Temperature on the bottom of the buffer</description>
+               <telegram  address="010E" type="short" divider="10"/>
+          </channel>
+          <channel id="circuitpump">
+               <description>Cirulation Pump for Hot Water</description>
+               <telegram  address="0410" type="boolean" />
+          </channel>
+    </thing>
+</optolink>
